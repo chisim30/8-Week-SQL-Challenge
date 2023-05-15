@@ -56,4 +56,19 @@ WHERE rowNumber = 1;
 
 ---
 
+**Query #4**
+What is the most purchased item on the menu and how many times was it purchased by all customers?
+```
+SELECT product_name, COUNT(a.product_id) as sale_count
+FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id
+GROUP BY product_name
+LIMIT 1;
+```
+
+| product_name | sale_count |
+| ------------ | ---------- |
+| ramen        | 8          |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
