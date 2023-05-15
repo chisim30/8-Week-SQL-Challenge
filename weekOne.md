@@ -7,7 +7,6 @@ What is the total amount each customer spent at the restaurant?
     dannys_diner.sales b on a.product_id = b.product_id
     GROUP BY customer_id
     ORDER BY customer_id;
-    
 ```
 
 | customer_id | total |
@@ -18,4 +17,22 @@ What is the total amount each customer spent at the restaurant?
 
 ---
 
+**Query #2**
+How many days has each customer visited the restaurant?
+
+```
+SELECT customer_id, COUNT (DISTINCT order_date) as days_visited
+FROM dannys_diner.sales
+GROUP BY customer_id
+```
+
+| customer_id | days_visited |
+| ----------- | ------------ |
+| A           | 4            |
+| B           | 6            |
+| C           | 2            |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
