@@ -23,7 +23,7 @@ How many days has each customer visited the restaurant?
 ```
 SELECT customer_id, COUNT (DISTINCT order_date) as days_visited
 FROM dannys_diner.sales
-GROUP BY customer_id
+GROUP BY customer_id;
 ```
 
 | customer_id | days_visited |
