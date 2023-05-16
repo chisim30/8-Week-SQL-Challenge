@@ -76,10 +76,10 @@ Which item was the most popular for each customer?
 ```sql
     SELECT customer_id, product_name, amount
     FROM
-    (SELECT customer_id, product_name, COUNT(*) as amount, RANK() OVER(PARTITION BY customer_id ORDER BY COUNT(*) DESC) as rank
-    FROM dannys_diner.menu a INNER JOIN dannys_diner.sales b ON a.product_id=b.product_id
-    GROUP BY customer_id, product_name
-    ORDER BY customer_id, amount) as tab
+        (SELECT customer_id, product_name, COUNT(*) as amount, RANK() OVER(PARTITION BY customer_id ORDER BY COUNT(*) DESC) as rank
+    	FROM dannys_diner.menu a INNER JOIN dannys_diner.sales b ON a.product_id=b.product_id
+    	GROUP BY customer_id, product_name
+    	ORDER BY customer_id, amount) as tab
     WHERE rank = 1;
 ```
 | customer_id | product_name | amount |
@@ -99,11 +99,11 @@ Which item was purchased first by the customer after they became a member?
     FROM 
     	(SELECT *, ROW_NUMBER() OVER(PARTITION BY join_date ORDER BY join_date, order_date)
     	 FROM
-    		(SELECT a.customer_id, a.join_date, b.order_date, product_name
-    		FROM dannys_diner.members a INNER JOIN dannys_diner.sales b on a.customer_id=b.customer_id
-                INNER JOIN dannys_diner.menu c ON b.product_id=c.product_id) as tab
-    		WHERE order_date >= join_date 
-    		ORDER BY join_date, order_date) as tab
+    	     (SELECT a.customer_id, a.join_date, b.order_date, product_name
+    	     FROM dannys_diner.members a INNER JOIN dannys_diner.sales b on a.customer_id=b.customer_id
+             INNER JOIN dannys_diner.menu c ON b.product_id=c.product_id) as tab
+    	     WHERE order_date >= join_date 
+    	     ORDER BY join_date, order_date) as tab
      WHERE row_number = 1;
 ```
 
@@ -119,10 +119,10 @@ Which item was purchased just before the customer became a member?
 ```sql
      SELECT customer_id, order_date, join_date, product_name
      FROM
-      (SELECT *, RANK() OVER(PARTITION BY customer_id ORDER BY order_date DESC)
-       FROM
-	   (SELECT a.customer_id, a.order_date, b.join_date, product_name
-	    FROM dannys_diner.sales a INNER JOIN dannys_diner.members b ON a.customer_id=b.customer_id INNER JOIN dannys_diner.menu c ON a.product_id=c.product_id) as tab
+         (SELECT *, RANK() OVER(PARTITION BY customer_id ORDER BY order_date DESC)
+         FROM
+	     (SELECT a.customer_id, a.order_date, b.join_date, product_name
+	     FROM dannys_diner.sales a INNER JOIN dannys_diner.members b ON a.customer_id=b.customer_id INNER JOIN dannys_diner.menu c ON a.product_id=c.product_id) as                tab
             WHERE order_date < join_date) as tab
      WHERE rank = 1
 ```
