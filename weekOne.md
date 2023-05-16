@@ -114,5 +114,25 @@ Which item was purchased first by the customer after they became a member?
 
 ---
 
+**Query #7**
+Which item was purchased just before the customer became a member?
+```
+     SELECT customer_id, order_date, join_date, product_name
+     FROM
+      (SELECT *, RANK() OVER(PARTITION BY customer_id ORDER BY order_date DESC)
+       FROM
+	   (SELECT a.customer_id, a.order_date, b.join_date, product_name
+	    FROM dannys_diner.sales a INNER JOIN dannys_diner.members b ON a.customer_id=b.customer_id INNER JOIN dannys_diner.menu c ON a.product_id=c.product_id) as tab
+            WHERE order_date < join_date) as tab
+     WHERE rank = 1
+```
+
+| customer_id | order_date               | join_date                | product_name |
+| ----------- | ------------------------ | ------------------------ | ------------ |
+| A           | 2021-01-01T00:00:00.000Z | 2021-01-07T00:00:00.000Z | sushi        |
+| A           | 2021-01-01T00:00:00.000Z | 2021-01-07T00:00:00.000Z | curry        |
+| B           | 2021-01-04T00:00:00.000Z | 2021-01-09T00:00:00.000Z | sushi        |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
