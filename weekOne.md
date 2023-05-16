@@ -97,7 +97,7 @@ Which item was purchased first by the customer after they became a member?
 ```
     SELECT customer_id, join_date, order_date, product_name
     FROM 
-    	(SELECT *, ROW_NUMBER() OVER(PARTITION BY join_date ORDER BY 		join_date, order_date)
+    	(SELECT *, ROW_NUMBER() OVER(PARTITION BY join_date ORDER BY join_date, order_date)
     	 FROM
     		(SELECT a.customer_id, a.join_date, b.order_date, product_name
     		FROM dannys_diner.members a INNER JOIN dannys_diner.sales b on a.customer_id=b.customer_id
