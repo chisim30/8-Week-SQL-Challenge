@@ -1,7 +1,7 @@
 **Query #1**
 What is the total amount each customer spent at the restaurant?
 
-```  
+```sql 
 SELECT customer_id, SUM(price) as Total
 FROM dannys_diner.menu a INNER JOIN
 dannys_diner.sales b on a.product_id = b.product_id
@@ -20,7 +20,7 @@ ORDER BY customer_id;
 **Query #2**
 How many days has each customer visited the restaurant?
 
-```
+```sql
 SELECT customer_id, COUNT (DISTINCT order_date) as days_visited
 FROM dannys_diner.sales
 GROUP BY customer_id;
@@ -37,7 +37,7 @@ GROUP BY customer_id;
 **Query #3**
 What was the first item from the menu purchased by each customer?
 
-```
+```sql
 WITH my_cte as
   (SELECT *, ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY order_date) as rowNumber
    FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b
@@ -58,7 +58,7 @@ WHERE rowNumber = 1;
 
 **Query #4**
 What is the most purchased item on the menu and how many times was it purchased by all customers?
-```
+```sql
 SELECT product_name, COUNT(a.product_id) as sale_count
 FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id
 GROUP BY product_name
@@ -73,7 +73,7 @@ LIMIT 1;
 
 **Query #5**
 Which item was the most popular for each customer?
-```
+```sql
     SELECT customer_id, product_name, amount
     FROM
     (SELECT customer_id, product_name, COUNT(*) as amount, RANK() OVER(PARTITION BY customer_id ORDER BY COUNT(*) DESC) as rank
@@ -94,7 +94,7 @@ Which item was the most popular for each customer?
 
 **Query #6**
 Which item was purchased first by the customer after they became a member?
-```
+```sql
     SELECT customer_id, join_date, order_date, product_name
     FROM 
     	(SELECT *, ROW_NUMBER() OVER(PARTITION BY join_date ORDER BY join_date, order_date)
@@ -116,7 +116,7 @@ Which item was purchased first by the customer after they became a member?
 
 **Query #7**
 Which item was purchased just before the customer became a member?
-```
+```sql
      SELECT customer_id, order_date, join_date, product_name
      FROM
       (SELECT *, RANK() OVER(PARTITION BY customer_id ORDER BY order_date DESC)
@@ -137,7 +137,7 @@ Which item was purchased just before the customer became a member?
 
 **Query #8**
 
-```
+```sql
     SELECT a.customer_id, COUNT(*) as items_count, SUM(price) as total_amount
     FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id INNER JOIN dannys_diner.members c ON a.customer_id=c.customer_id
     WHERE order_date < join_date
@@ -154,7 +154,7 @@ Which item was purchased just before the customer became a member?
 **Query #9**
 If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
-```
+```sql
     SELECT customer_id, SUM(total_points) as total_points
     FROM 
     	(SELECT *,
