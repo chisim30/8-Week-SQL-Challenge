@@ -14,3 +14,4 @@ He plans on using these insights to help him decide whether he should expand the
 
 My Job is to write queries to produce the data needed to answer business questions.
 
+Check out the questions and my solutions [here](https://github.com/chisim30/SQL-SQL-SQL-/blob/main/weekOne.md)
