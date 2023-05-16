@@ -101,7 +101,7 @@ Which item was purchased first by the customer after they became a member?
     	 FROM
     		(SELECT a.customer_id, a.join_date, b.order_date, product_name
     		FROM dannys_diner.members a INNER JOIN dannys_diner.sales b on a.customer_id=b.customer_id
-        INNER JOIN dannys_diner.menu c ON b.product_id=c.product_id) as tab
+                INNER JOIN dannys_diner.menu c ON b.product_id=c.product_id) as tab
     		WHERE order_date >= join_date 
     		ORDER BY join_date, order_date) as tab
      WHERE row_number = 1;
