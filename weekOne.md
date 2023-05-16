@@ -71,4 +71,25 @@ LIMIT 1;
 
 ---
 
+**Query #5**
+Which item was the most popular for each customer?
+```
+    SELECT customer_id, product_name, amount
+    FROM
+    (SELECT customer_id, product_name, COUNT(*) as amount, RANK() OVER(PARTITION BY customer_id ORDER BY COUNT(*) DESC) as rank
+    FROM dannys_diner.menu a INNER JOIN dannys_diner.sales b ON a.product_id=b.product_id
+    GROUP BY customer_id, product_name
+    ORDER BY customer_id, amount) as tab
+    WHERE rank = 1;
+```
+| customer_id | product_name | amount |
+| ----------- | ------------ | ------ |
+| A           | ramen        | 3      |
+| B           | ramen        | 2      |
+| B           | curry        | 2      |
+| B           | sushi        | 2      |
+| C           | ramen        | 3      |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
