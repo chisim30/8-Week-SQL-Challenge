@@ -135,4 +135,22 @@ Which item was purchased just before the customer became a member?
 
 ---
 
+**Query #8**
+
+```
+    SELECT a.customer_id, COUNT(*) as items_count, SUM(price) as total_amount
+    FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id INNER JOIN dannys_diner.members c ON a.customer_id=c.customer_id
+    WHERE order_date < join_date
+    GROUP BY a.customer_id
+    ORDER BY a.customer_id;
+```
+
+| customer_id | items_count | total_amount |
+| ----------- | ----------- | ------------ |
+| A           | 2           | 25           |
+| B           | 3           | 40           |
+---
+
+
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
