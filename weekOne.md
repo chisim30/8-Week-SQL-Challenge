@@ -155,7 +155,7 @@ Which item was purchased just before the customer became a member?
 If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
 ```
-    SELECT customer_id, SUM(total_points)
+    SELECT customer_id, SUM(total_points) as total_points
     FROM 
     	(SELECT *,
     	CASE WHEN product_name = 'sushi' THEN points * 2
@@ -170,7 +170,7 @@ If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how
     GROUP BY customer_id
     ORDER BY customer_id ASC;
 ```
-| customer_id | sum  |
+| customer_id | total_points |
 | ----------- | ---- |
 | A           | 1082 |
 | B           | 1138 |
