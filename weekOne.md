@@ -92,4 +92,27 @@ Which item was the most popular for each customer?
 
 ---
 
+**Query #6**
+Which item was purchased first by the customer after they became a member?
+```
+    SELECT customer_id, join_date, order_date, product_name
+    FROM 
+    	(SELECT *, ROW_NUMBER() OVER(PARTITION BY join_date ORDER BY 		join_date, order_date)
+    	 FROM
+    		(SELECT a.customer_id, a.join_date, b.order_date, product_name
+    		FROM dannys_diner.members a INNER JOIN dannys_diner.sales b on a.customer_id=b.customer_id
+        INNER JOIN dannys_diner.menu c ON b.product_id=c.product_id) as tab
+    		WHERE order_date >= join_date 
+    		ORDER BY join_date, order_date) as tab
+     WHERE row_number = 1;
+```
+
+| customer_id | join_date                | order_date               | product_name |
+| ----------- | ------------------------ | ------------------------ | ------------ |
+| A           | 2021-01-07T00:00:00.000Z | 2021-01-07T00:00:00.000Z | curry        |
+| B           | 2021-01-09T00:00:00.000Z | 2021-01-11T00:00:00.000Z | sushi        |
+
+---
+
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
