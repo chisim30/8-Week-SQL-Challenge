@@ -151,6 +151,33 @@ Which item was purchased just before the customer became a member?
 | B           | 3           | 40           |
 ---
 
+**Query #9**
+If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
 
+```
+    SELECT customer_id, SUM(total_points)
+    FROM 
+    	(SELECT *,
+    	CASE WHEN product_name = 'sushi' THEN points * 2
+    	ELSE points
+    	END as total_points
+    	FROM 
+    	    (SELECT *,
+    	    CASE WHEN price > 0 THEN price * price
+            ELSE price
+    	    END as points
+    	    FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id) as tab) as tab
+    GROUP BY customer_id
+    ORDER BY customer_id ASC;
+```
+| customer_id | sum  |
+| ----------- | ---- |
+| A           | 1082 |
+| B           | 1138 |
+| C           | 432  |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
