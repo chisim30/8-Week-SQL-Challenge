@@ -36,3 +36,6 @@ Because Danny had a few years of experience as a data scientist - he was very aw
 
 He has prepared for us an entity relationship diagram of his database design but requires further assistance to clean his data and apply some basic calculations so he can better direct his runners and optimise Pizza Runner’s operations.
 My job is to help Danny write queries to help clean his data and perform calculations with SQL
+
+### Schema
+<img src="https://github.com/chisim30/SQL-SQL-SQL-/blob/main/schemas/pizza_runner.png" width="400" height="200">
