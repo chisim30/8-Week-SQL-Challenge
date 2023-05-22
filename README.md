@@ -14,6 +14,10 @@ He plans on using these insights to help him decide whether he should expand the
 
 My Job is to write queries to produce the data needed to answer business questions.
 
+### Schema
+<img src="https://github.com/chisim30/SQL-SQL-SQL-/blob/main/schemas/Danny's_Diner.png" width="400" height="200">
+
+
 Check out the questions and my solutions [here](https://github.com/chisim30/SQL-SQL-SQL-/blob/main/weekOne.md)
 
 
@@ -27,7 +31,7 @@ Danny was sold on the idea, but he knew that pizza alone was not going to help h
 
 Danny started by recruiting “runners” to deliver fresh pizza from Pizza Runner Headquarters (otherwise known as Danny’s house) and also maxed out his credit card to pay freelance developers to build a mobile app to accept orders from customers.
 
-###Problem Statement
+### Problem Statement
 Because Danny had a few years of experience as a data scientist - he was very aware that data collection was going to be critical for his business’ growth.
 
 He has prepared for us an entity relationship diagram of his database design but requires further assistance to clean his data and apply some basic calculations so he can better direct his runners and optimise Pizza Runner’s operations.
