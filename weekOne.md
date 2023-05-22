@@ -136,7 +136,7 @@ Which item was purchased just before the customer became a member?
 ---
 
 **Query #8**
-
+What is the total items and amount spent for each member before they became a member?
 ```sql
     SELECT a.customer_id, COUNT(*) as items_count, SUM(price) as total_amount
     FROM dannys_diner.sales a INNER JOIN dannys_diner.menu b ON a.product_id=b.product_id INNER JOIN dannys_diner.members c ON a.customer_id=c.customer_id
