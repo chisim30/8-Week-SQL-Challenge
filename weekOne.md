@@ -178,4 +178,34 @@ If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how
 
 ---
 
-[View on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
+**Query #10**
+In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+```sql
+    WITH cte as (SELECT *,
+    CASE WHEN week_num = 1 THEN points * 2
+    ELSE points
+    END as total_points
+    FROM 
+    	(SELECT *,
+    	CASE WHEN price > 0 THEN price * price
+    	ELSE price
+    	END as points
+    	FROM
+    	    (SELECT a.customer_id, order_date, price, DATE_PART('week', order_date) as week_num
+    	    FROM dannys_diner.sales a INNER JOIN dannys_diner.members b 
+	    ON a.customer_id=b.customer_id INNER JOIN dannys_diner.menu c ON a.product_id=c.product_id) as tabOne) as tabTwo
+    	    WHERE order_date <= '2021-01-31')
+    
+    SELECT customer_id, sum(total_points) as total_points
+    FROM cte
+    GROUP BY customer_id;
+```
+| customer_id | total_points |
+| ----------- | ------------ |
+| A           | 1351         |
+| B           | 894          |
+
+---
+
+[Try Query on DB Fiddle](https://www.db-fiddle.com/f/2rM8RAnq7h5LLDTzZiRWcd/138)
