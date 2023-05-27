@@ -41,7 +41,7 @@
 ```sql
     SELECT pizza_name, COUNT(a.customer_id) as count
     FROM customer_orders a INNER JOIN pizza_names b ON a.pizza_id=b.pizza_id
-    GROUP BY pizza_name
+    GROUP BY pizza_name;
 ```
 
 | pizza_name | count |
