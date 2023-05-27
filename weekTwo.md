@@ -43,4 +43,12 @@
     FROM customer_orders a INNER JOIN pizza_names b ON a.pizza_id=b.pizza_id
     GROUP BY pizza_name
 ```
+
+| pizza_name | count |
+| --------- | ---------------- |
+| Meatlovers         | 10                |
+| Vegetarian         | 4               |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
