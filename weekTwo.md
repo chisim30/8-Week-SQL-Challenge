@@ -1,5 +1,5 @@
 
-
+### A. Pizza Metrics
 **Query #1** How many pizzas were ordered?
 ```sql
     SELECT COUNT(*) as total_number_of_orders
