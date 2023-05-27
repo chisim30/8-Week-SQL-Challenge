@@ -11,4 +11,15 @@
 
 ---
 
+**Query #2** How many unique customer orders were made?
+```sql
+    SELECT COUNT (DISTINCT order_id) as unique_orders
+    FROM pizza_runner.customer_orders;
+```
+| unique_orders |
+| ------------- |
+| 10            |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
