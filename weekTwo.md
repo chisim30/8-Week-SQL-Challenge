@@ -37,4 +37,10 @@
 
 ---
 
+**Query #4** How many of each type of pizza was delivered?
+```sql
+    SELECT pizza_name, COUNT(a.customer_id) as count
+    FROM customer_orders a INNER JOIN pizza_names b ON a.pizza_id=b.pizza_id
+    GROUP BY pizza_name
+```
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
