@@ -79,9 +79,9 @@
         
     SELECT order_id, max(order_count) as order_count
     FROM cte
-    group by order_id
-    order by order_count desc
-    limit 1;
+    GROUP BY order_id
+    ORDER BY order_count DESC
+    LIMIT 1;
 ```
 | order_id | order_count |
 | -------- | ----------- |
