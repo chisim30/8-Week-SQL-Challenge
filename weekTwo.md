@@ -71,4 +71,22 @@
 
 ---
 
+**Query #6** What was the maximum number of pizzas delivered in a single order?
+```sql
+    WITH cte as 
+     	(SELECT *, ROW_NUMBER() OVER(PARTITION BY order_id ORDER BY order_id) as order_count
+     	FROM pizza_runner.customer_orders)
+        
+    SELECT order_id, max(order_count) as order_count
+    FROM cte
+    group by order_id
+    order by order_count desc
+    limit 1;
+```
+| order_id | order_count |
+| -------- | ----------- |
+| 4        | 3           |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
