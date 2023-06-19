@@ -157,5 +157,27 @@
 
 ---
 
+**Query #2** What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+
+```sql
+    WITH cte as (SELECT runner_id, AVG(ABS(EXTRACT(minute FROM order_time) - EXTRACT(minute from pickup))) as avg_time_minutes
+    FROM 
+    	(SELECT *, CAST(pickup_time as TIMESTAMP) as pickup
+    	FROM pizza_runner.runner_orders a LEFT JOIN 					pizza_runner.customer_orders b ON a.order_id = b.order_id
+    	WHERE pickup_time != 'null') as tab
+    GROUP BY runner_id
+    ORDER BY runner_id)
+    
+    SELECT runner_id, ROUND(CAST(avg_time_minutes as NUMERIC), 2)
+    FROM cte;
+```
+
+| runner_id | round |
+| --------- | ----- |
+| 1         | 21.67 |
+| 2         | 27.80 |
+| 3         | 10.00 |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
