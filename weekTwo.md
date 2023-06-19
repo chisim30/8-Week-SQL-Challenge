@@ -180,4 +180,22 @@
 
 ---
 
+**Query #4** What was the average distance traveled for each customer?
+```sql
+    SELECT customer_id, ROUND(AVG(CAST(SUBSTRING(distance, '[0-9.]+') as NUMERIC)),2) as avg_distance_km
+    FROM pizza_runner.runner_orders a LEFT JOIN pizza_runner.customer_orders b ON a.order_id=b.order_id
+    GROUP by customer_id
+    ORDER BY customer_id;
+```
+
+| customer_id | avg_distance_km |
+| ----------- | --------------- |
+| 101         | 20.00           |
+| 102         | 16.73           |
+| 103         | 23.40           |
+| 104         | 10.00           |
+| 105         | 25.00           |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
