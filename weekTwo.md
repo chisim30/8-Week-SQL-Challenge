@@ -88,5 +88,20 @@
 | 4        | 3           |
 
 ---
+```sql
+    SELECT COUNT(*) as total_with_exclusions_and_extras
+    FROM (SELECT *, 
+	 CASE WHEN exclusions = '' THEN 'null' ELSE exclusions END as exclusion,
+     CASE WHEN extras = '' THEN 'null' ELSE extras END as extra
+     FROM pizza_runner.customer_orders) as tab
+    WHERE exclusion != 'null' and extra != 'null'
+```
+| total_with_exclusions_and_extras |
+| -------------------------------- |
+| 2                                |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
