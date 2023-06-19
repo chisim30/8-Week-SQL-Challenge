@@ -88,6 +88,8 @@
 | 4        | 3           |
 
 ---
+
+**Query #8** How many pizzas were delivered that had both exclusions and extras?
 ```sql
     SELECT COUNT(*) as total_with_exclusions_and_extras
     FROM (SELECT *, 
