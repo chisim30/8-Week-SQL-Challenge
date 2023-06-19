@@ -123,5 +123,22 @@
 | 3      | 23          |
 
 ---
+**Query #10** What was the volume of orders for each day of the week?
+```sql
+    SELECT COUNT(*) as volume, EXTRACT('DOW' from order_time) as days
+    FROM pizza_runner.customer_orders
+    GROUP BY days
+    ORDER BY days;
+```
+
+
+| volume | days |
+| ------ | ---- |
+| 5      | 3    |
+| 3      | 4    |
+| 1      | 5    |
+| 5      | 6    |
+
+---
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
