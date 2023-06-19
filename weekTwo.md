@@ -104,6 +104,28 @@
 
 ---
 
+**Query #9** What was the total volume of pizzas ordered for each hour of the day?
+```sql
+    SELECT COUNT(*) as volume, EXTRACT(hour from order_time) as hour_of_day
+    FROM pizza_runner.customer_orders
+    GROUP BY hour_of_day
+    ORDER BY hour_of_day;
+```
+
+
+| volume | hour_of_day |
+| ------ | ----------- |
+| 1      | 11          |
+| 3      | 13          |
+| 3      | 18          |
+| 1      | 19          |
+| 3      | 21          |
+| 3      | 23          |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
