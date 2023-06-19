@@ -163,7 +163,7 @@
     WITH cte as (SELECT runner_id, AVG(ABS(EXTRACT(minute FROM order_time) - EXTRACT(minute from pickup))) as avg_time_minutes
     FROM 
     	(SELECT *, CAST(pickup_time as TIMESTAMP) as pickup
-    	FROM pizza_runner.runner_orders a LEFT JOIN 					pizza_runner.customer_orders b ON a.order_id = b.order_id
+    	FROM pizza_runner.runner_orders a LEFT JOIN pizza_runner.customer_orders b ON a.order_id = b.order_id
     	WHERE pickup_time != 'null') as tab
     GROUP BY runner_id
     ORDER BY runner_id)
