@@ -168,11 +168,11 @@
     GROUP BY runner_id
     ORDER BY runner_id)
     
-    SELECT runner_id, ROUND(CAST(avg_time_minutes as NUMERIC), 2)
+    SELECT runner_id, ROUND(CAST(avg_time_minutes as NUMERIC), 2) as avg_time_minutes
     FROM cte;
 ```
 
-| runner_id | round |
+| runner_id | avg_time_minutes |
 | --------- | ----- |
 | 1         | 21.67 |
 | 2         | 27.80 |
