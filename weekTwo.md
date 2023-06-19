@@ -142,7 +142,20 @@
 ---
 
 ### B. Runner and Customer Experience
+**Query #1** How many runners signed up for each 1 week period?
+```sql
+    SELECT COUNT(DISTINCT runner_id) as number_of_runners, EXTRACT(week from cast(pickup_time as TIMESTAMP)) as week
+    FROM pizza_runner.runner_orders
+    WHERE pickup_time != 'null'
+    GROUP BY week;
+```
 
+| number_of_runners | week |
+| ----------------- | ---- |
+| 2                 | 1    |
+| 3                 | 2    |
+
+---
 
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
