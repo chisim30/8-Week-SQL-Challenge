@@ -198,4 +198,19 @@
 
 ---
 
+**Query #5** What was the difference between the longest and shortest delivery times for all orders?
+
+```sql
+    SELECT MAX(durations) - MIN(durations) as difference
+    FROM(
+      SELECT *, CAST(SUBSTRING(duration, '[0-9]+') AS NUMERIC) as durations
+    	FROM pizza_runner.runner_orders) as tab;
+```
+
+| difference |
+| ---------- |
+| 30         |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
