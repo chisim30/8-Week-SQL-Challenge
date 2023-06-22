@@ -213,7 +213,7 @@
 
 ---
 
-**Query #6 What was the average speed for each runner for each delivery and do you notice any trend for these values?**
+**Query #6** What was the average speed for each runner for each delivery and do you notice any trend for these values?
 ```sql
     SELECT runner_id, order_id, ROUND(AVG(distances / times),2) as speed
     FROM
@@ -234,6 +234,26 @@
 | 2         | 7        | 16.67 |
 | 2         | 8        | 26.00 |
 | 3         | 5        | 11.11 |
+
+---
+
+**Query #7** What is the successful delivery percentage for each runner?
+
+```sql
+    SELECT runner_id, SUM(completed) * 100 /COUNT(runner_id) as percentage_completed
+    FROM 
+    	(SELECT *,
+    	CASE WHEN cancellation = 'null' or cancellation = '' or cancellation 	IS NULL THEN 1 ELSE 0 END as completed
+    	FROM pizza_runner.runner_orders) as tab
+    GROUP BY runner_id
+    ORDER BY runner_id;
+```
+
+| runner_id | percentage_completed |
+| --------- | -------------------- |
+| 1         | 100                  |
+| 2         | 75                   |
+| 3         | 50                   |
 
 ---
 
