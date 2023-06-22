@@ -213,4 +213,28 @@
 
 ---
 
+**Query #6 What was the average speed for each runner for each delivery and do you notice any trend for these values?**
+```sql
+    SELECT runner_id, order_id, ROUND(AVG(distances / times),2) as speed
+    FROM
+    	(SELECT *, CAST(SUBSTRING(distance, '[0-9.]+') AS NUMERIC)*1000 as distances, CAST(SUBSTRING(duration, '[0-9.]+') AS NUMERIC)*60 as times
+    	FROM pizza_runner.runner_orders
+    	WHERE distance != 'null' and duration != 'null') as tab
+    GROUP BY runner_id, order_id
+    ORDER BY runner_id, order_id;
+```
+
+| runner_id | order_id | speed |
+| --------- | -------- | ----- |
+| 1         | 1        | 10.42 |
+| 1         | 2        | 12.35 |
+| 1         | 3        | 11.17 |
+| 1         | 10       | 16.67 |
+| 2         | 4        | 9.75  |
+| 2         | 7        | 16.67 |
+| 2         | 8        | 26.00 |
+| 3         | 5        | 11.11 |
+
+---
+
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
