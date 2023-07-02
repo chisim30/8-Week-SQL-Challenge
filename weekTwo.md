@@ -243,7 +243,7 @@
     SELECT runner_id, SUM(completed) * 100 /COUNT(runner_id) as percentage_completed
     FROM 
     	(SELECT *,
-    	CASE WHEN cancellation = 'null' or cancellation = '' or cancellation 	IS NULL THEN 1 ELSE 0 END as completed
+    	CASE WHEN cancellation = 'null' or cancellation = '' or cancellation IS NULL THEN 1 ELSE 0 END as completed
     	FROM pizza_runner.runner_orders) as tab
     GROUP BY runner_id
     ORDER BY runner_id;
