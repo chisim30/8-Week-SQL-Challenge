@@ -258,5 +258,34 @@
 ---
 
 ### C. Ingredient Optimisation
+**Query #1** What are the standard ingredients for each pizza?
+
+```sql
+SELECT pn.pizza_name AS pizza_name, pt.topping_name AS standard_ingredient
+FROM pizza_names pn
+JOIN pizza_recipes pr ON pn.pizza_id = pr.pizza_id JOIN pizza_toppings pt ON pt.topping_id = ANY (string_to_array(pr.toppings, ', '))
+ORDER BY pn.pizza_id, pt.topping_id;
+```
+
+**Query #2** What was the most commonly added extra?
+
+```sql
+SELECT extras AS added_extra, COUNT(*) AS count
+FROM customer_orders
+WHERE extras IS NOT NULL
+GROUP BY extras
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+```
+
+**Query #3** What was the most common exclusion?
+```sql
+SELECT exclusions, COUNT(*) AS count
+FROM customer_orders
+WHERE exclusions IS NOT NULL
+GROUP BY exclusions
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+```
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
