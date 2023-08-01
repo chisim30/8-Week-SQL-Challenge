@@ -275,8 +275,13 @@ FROM customer_orders
 WHERE extras IS NOT NULL
 GROUP BY extras
 ORDER BY COUNT(*) DESC
-LIMIT 1;
+LIMIT 1
+OFFSET 1;
 ```
+| added extra | count |
+| --------- | -------------------- |
+| 1         | 2                  |
+
 
 **Query #3** What was the most common exclusion?
 ```sql
@@ -285,7 +290,15 @@ FROM customer_orders
 WHERE exclusions IS NOT NULL
 GROUP BY exclusions
 ORDER BY COUNT(*) DESC
-LIMIT 1;
+LIMIT 1
+OFFSET 1;
 ```
+| exclusion | count |
+| --------- | -------------------- |
+| 4         | 4                 |
+
+
+### D. Pricing and Ratings
+
 
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
