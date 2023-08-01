@@ -266,7 +266,7 @@ FROM pizza_names pn
 JOIN pizza_recipes pr ON pn.pizza_id = pr.pizza_id JOIN pizza_toppings pt ON pt.topping_id = ANY (string_to_array(pr.toppings, ', '))
 ORDER BY pn.pizza_id, pt.topping_id;
 ```
-
+---
 **Query #2** What was the most commonly added extra?
 
 ```sql
@@ -281,7 +281,7 @@ OFFSET 1;
 | added extra | count |
 | --------- | -------------------- |
 | 1         | 2                  |
-
+---
 
 **Query #3** What was the most common exclusion?
 ```sql
@@ -296,7 +296,7 @@ OFFSET 1;
 | exclusion | count |
 | --------- | -------------------- |
 | 4         | 4                 |
-
+---
 
 ### D. Pricing and Ratings
 
