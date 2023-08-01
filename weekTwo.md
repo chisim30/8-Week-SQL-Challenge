@@ -300,5 +300,16 @@ OFFSET 1;
 
 ### D. Pricing and Ratings
 
-
+**Query #1** If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
+```sql
+SELECT SUM(price) as total
+FROM (SELECT *,
+CASE WHEN a.pizza_id = 1 THEN 12 ELSE 10 END AS price
+FROM customer_orders a INNER JOIN runner_orders b ON a.order_id=b.order_id
+WHERE cancellation IS NULL) as tab
+```
+| total |
+| --------- | 
+| 114         | 
+---
 [View on DB Fiddle](https://www.db-fiddle.com/f/7VcQKQwsS3CTkGRFG7vu98/65)
