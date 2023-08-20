@@ -39,3 +39,7 @@ My job is to help Danny write queries to help clean his data and perform calcula
 
 ### Schema
 <img src="https://github.com/chisim30/SQL-SQL-SQL-/blob/main/schemas/pizza_runner.png" width="400" height="200">
+
+
+# Case Study 3 - Foodie-Fi.
+### Introduction
